@@ -1,4 +1,7 @@
 from lxml import html
+from lxml import etree
+from lxml.html import fromstring
+from io import StringIO
 import requests
 
 #test website
@@ -23,3 +26,11 @@ for link in links:
         print("error loading:", response.url)
         exit(1)
     print("loaded", response.url)
+
+    tree = fromstring(response.content)
+    print(tree.findtext('.//h1'))
+
+    #validate html
+    # if not etree.parse(response.text, etree.HTMLParser(recover=False)):
+    #     exit(1)
+
